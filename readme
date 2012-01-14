@@ -5,3 +5,43 @@ when prompted choose samsung and click yes on any/all popups to install samsung'
 
 then run the run.bat as admin (right click and run as administrator), 
 if it gives errors please wait 2-3 mins and try again as the computer might be installing drivers
+
+
+
+Changelog:
+
+v1.0 
+Initial release
+
+v2.0
+Added busybox install
+Removed that pesky installrecovery.sh so now anyone running this will have cwm
+upgraded to cwm 4.0.0.2 orange courtesy of j_r0dd 
+
+v3.0
+removed busybox install
+Updated to CWM 5.0.2.0
+Added support for GSM phones
+
+v4.0
+Removed unroot option as it was unpractical
+Upgraded to cwm 5.0.2.3 cyan courtesy of j_r0dd 
+Added TWRP 1.1.1 (Team Win Recovery Project) as an option when rooting 
+Updated su to 3.0.6
+Massive code cleanup
+
+5.0
+Allow for more unlocking options :)
+Adds support for Galaxy nexus (GSM/HSPA)
+
+
+Credits: 
+
+-Drockstar for his awesome sauce menu on his one clicks and helping me out when i needed it :)
+-ACS for bein awesome
+-the followin guys for their continuing help:
+Nullghost
+Decad3nce
+Rodderick
+Nubecoder 
+and many more :)
