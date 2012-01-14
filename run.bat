@@ -192,20 +192,20 @@ echo.
 echo 1) Nexus S (GSM)
 echo 2) Nexus S 4G (CDMA)
 echo 3) Galaxy Nexus (GSM)
-REM echo 4) Galaxy Nexus (CDMA/LTE) 
+echo 4) Galaxy Nexus (CDMA/LTE) 
 echo 4) Quit
 echo.
 echo ONLY ONE MENU ITEM IS RUN AT A TIME
 echo.
 set menu=""
-set /p menu=Please type a number [1-4] and press enter 
+set /p menu=Please type a number [1-5] and press enter 
 echo.
 echo.
 if "%menu%"=="1" goto :crespomenu
 if "%menu%"=="2" goto :crespo4gmenu
 if "%menu%"=="3" goto :GalMenu
-REM if "%menu%"=="4" goto :GalLTEmenu
-if "%menu%"=="4" goto :eof
+if "%menu%"=="4" goto :GalLTEmenu
+if "%menu%"=="5" goto :eof
 goto :menu
 
 REM This is teh part of the script that unlocks the bootloader and then forwards onto menu so users can pick their device
@@ -364,14 +364,14 @@ REM Here are teh different phone menus trying to keep them seperate :)
 
 :crespomenu
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
-echo Nexus S All in One Root and Recovery v5.0
+echo Nexus S All in One Root and Recovery v5.1
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo.
 echo.
 echo Menu:
 echo.
 echo 1) Root and Install ClockworkMod 5.0.2.0
-echo 2) Root and Install TWRP 1.1.1
+echo 2) Root and Install TWRP 2.0 RC0
 echo 3) Quit
 echo.
 echo.
@@ -386,14 +386,14 @@ goto :crespomenu
 
 :crespo4gmenu
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
-echo Nexus S 4G All in One Root and Recovery v5.0
+echo Nexus S 4G All in One Root and Recovery v5.1
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo.
 echo.
 echo Menu:
 echo.
 echo 1) Root and Install ClockworkMod 5.0.2.0
-echo 2) Root and Install TWRP 1.1.1
+echo 2) Root and Install TWRP 2.0 RC0
 echo 3) Quit
 echo.
 echo.
@@ -408,7 +408,7 @@ goto :crespo4gmenu
 
 :Galmenu
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
-echo Galaxy Nexus (GSM) All in One Root and Recovery v5.0
+echo Galaxy Nexus (GSM) All in One Root and Recovery v5.1
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo.
 echo.
@@ -428,13 +428,13 @@ goto :Galmenu
 
 :GalLTEmenu
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
-echo Galaxy Nexus (CDMA/LTE) All in One Root and Recovery v5.0
+echo Galaxy Nexus (CDMA/LTE) All in One Root and Recovery v5.1
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo.
 echo.
 echo Menu:
 echo.
-echo 1) Root and Install ClockworkMod 5.5.0.2
+echo 1) Root and Install ClockworkMod 5.5.0.4
 echo 2) Quit
 echo.
 echo.

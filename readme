@@ -34,6 +34,10 @@ Massive code cleanup
 Allow for more unlocking options :)
 Adds support for Galaxy nexus (GSM/HSPA)
 
+5.1
+Updated TWRP 1.1.1 to 2.0RC0 for Nexus S and Nexus S 4G
+Added support for Galaxy Nexus (CDMA/LTE)
+
 
 Credits: 
 
