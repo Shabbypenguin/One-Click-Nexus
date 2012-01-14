@@ -1,4 +1,9 @@
 @echo off
+echo Windows batch scripts by DRockstar and Firon
+echo.
+echo Original credits: joeykrim, noobnl, skeeterslint, koush, and firon
+echo for their original exploit, root, recovery, busybox, and kung fu
+echo kang'd drockstars menu for nexus s
 cls
 echo.
 echo.
@@ -100,6 +105,7 @@ echo.
 echo.
 fastboot.exe oem unlock
 echo.
+pause
 echo.
 echo.
 fastboot.exe reboot
@@ -117,7 +123,35 @@ pause
 @ping 127.0.0.1 -n 6 -w 1000 > nul
 adb.exe reboot bootloader
 @ping 127.0.0.1 -n 6 -w 1000 > nul
-fastboot.exe flash recovery recovery.img
+goto :menu
+
+
+:menu
+echo.
+echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+echo Please Choose Your Phone Model
+echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+echo.
+echo.
+echo Menu:
+echo.
+echo 1) Nexus S (GSM)
+echo 2) Nexus S 4G (CDMA)
+echo 3) Quit
+echo.
+echo ONLY ONE MENU ITEM IS RUN AT A TIME
+echo.
+set menu=""
+set /p menu=Please type a number [1-3] and press enter 
+echo.
+echo.
+if "%menu%"=="1" goto :crespomenu
+if "%menu%"=="2" goto :crespo4gmenu
+if "%menu%"=="3" goto :eof
+goto :menu
+
+:root
+fastboot.exe flash recovery Files/Crespo/recovery.img
 echo.
 echo.
 echo please use the volume down button and select recovery and press power
@@ -139,8 +173,7 @@ echo.
 echo.
 echo Pushing files over
 @ping 127.0.0.1 -n 6 -w 1000 > nul
-adb.exe push su.zip /sdcard/su.zip
-mv /system/etc/install-recovery.sh /system/etc/install-recovery.k-lined.sh
+adb.exe push root.zip /sdcard/root.zip
 echo.
 echo.
 echo.
@@ -158,7 +191,7 @@ echo.
 echo Select the 2nd option from this sub menu, choose zip from sdcard
 echo.
 echo.
-echo Scroll all the way down and select su.zip, choose yes
+echo Scroll all the way down and select root.zip, choose yes
 echo.
 pause
 echo.
@@ -177,16 +210,127 @@ echo all your base are belong to us
 adb.exe kill-server
 GOTO:EOF
 
+:root4g
+fastboot.exe flash recovery Files/Crespo4G/recovery.img
+echo.
+echo.
+echo please use the volume down button and select recovery and press power
+echo.
+echo.
+pause
+cls
+echo.
+echo Using volume up/down and the power button to select choose Mounts and storage.
+echo.
+echo Then select the top choice which should be mount /sdcard, once you have mounted the sd card
+echo.
+echo.
+pause
+cls
+echo.
+echo.
+echo.
+echo.
+echo Pushing files over
+@ping 127.0.0.1 -n 6 -w 1000 > nul
+adb.exe push root.zip /sdcard/root.zip
+echo.
+echo.
+echo.
+echo.
+echo Select go back (the bottom most option) or hit the back arrow softkey
+echo.
+echo.
+echo Then select option 5 from the top, (install zip from sd card)
+echo.
+pause
+cls
+echo.
+echo.
+echo.
+echo Select the 2nd option from this sub menu, choose zip from sdcard
+echo.
+echo.
+echo Scroll all the way down and select root.zip, choose yes
+echo.
+pause
+echo.
+adb.exe reboot
+cls
+echo.
+echo Congrats you are rooted!
+echo.
+echo Press the power button to reboot the phone
+echo.
+echo.
+pause
+echo.
+echo
+echo all your base are belong to us
+adb.exe kill-server
+GOTO:EOF
+
+:remove
+fastboot.exe flash system Files/system.img
+fastboot.exe flash boot Files/boot.img
+fastboot.exe flash recovery Files/recovery.img
+fastboot.exe oem lock
+fastboot.exe reboot
+echo No root here!!!!!!
+
+:crespomenu
+echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+echo Nexus S All in One Root and Recovery v3.0
+echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+echo.
+echo.
+echo Menu:
+echo.
+echo 1) Root and Install ClockworkMod 5.0.2.0
+echo 2) Unroot
+echo 3) Quit
+echo.
+echo ONLY ONE MENU ITEM IS RUN AT A TIME
+echo PLEASE READ GUIDE.HTML INSIDE FOLDER
+echo.
+set menu=""
+set /p menu=Please type a number [1-3] and press enter 
+echo.
+echo.
+if "%menu%"=="1" goto :root
+if "%menu%"=="2" goto :remove
+if "%menu%"=="3" goto :eof
+goto :crespomenu
+
+:crespo4gmenu
+echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+echo Nexus S 4G All in One Root and Recovery v3.0
+echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
+echo.
+echo.
+echo Menu:
+echo.
+echo 1) Root and Install ClockworkMod 5.0.2.0
+echo 2) Unroot
+echo 3) Quit
+echo.
+echo ONLY ONE MENU ITEM IS RUN AT A TIME
+echo PLEASE READ GUIDE.HTML INSIDE FOLDER
+echo.
+set menu=""
+set /p menu=Please type a number [1-3] and press enter 
+echo.
+echo.
+if "%menu%"=="1" goto :root4g
+if "%menu%"=="2" goto :remove
+if "%menu%"=="3" goto :eof
+goto :crespo4gmenu
+
 :Missingsu
 cls
 echo.
 echo.
-echo Su.zip is missing, please try downloading again.
+echo Root.zip is missing, please try downloading again.
 pause
 
-:Missingrecovery
-cls
-echo.
-echo.
-echo recovery.img is missing, please try downloading again.
-pause
+
