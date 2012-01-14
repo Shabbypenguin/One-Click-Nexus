@@ -158,59 +158,9 @@ echo please use the volume down button and select recovery and press power
 echo.
 echo.
 pause
-cls
-echo.
-echo Using volume up/down and the power button to select choose Mounts and storage.
-echo.
-echo Then select the top choice which should be mount /sdcard, once you have mounted the sd card
-echo.
-echo.
-pause
-cls
-echo.
-echo.
-echo.
-echo.
-echo Pushing files over
-@ping 127.0.0.1 -n 6 -w 1000 > nul
-adb.exe push root.zip /sdcard/root.zip
-echo.
-echo.
-echo.
-echo.
-echo Select go back (the bottom most option) or hit the back arrow softkey
-echo.
-echo.
-echo Then select option 5 from the top, (install zip from sd card)
-echo.
-pause
-cls
-echo.
-echo.
-echo.
-echo Select the 2nd option from this sub menu, choose zip from sdcard
-echo.
-echo.
-echo Scroll all the way down and select root.zip, choose yes
-echo.
-pause
-echo.
-adb.exe reboot
-cls
-echo.
-echo Congrats you are rooted!
-echo.
-echo Press the power button to reboot the phone
-echo.
-echo.
-pause
-echo.
-echo
-echo all your base are belong to us
-adb.exe kill-server
-GOTO:EOF
+goto :root
 
-:root4g
+:CWM4g
 fastboot.exe flash recovery Files/Crespo4G/recovery.img
 echo.
 echo.
@@ -218,6 +168,9 @@ echo please use the volume down button and select recovery and press power
 echo.
 echo.
 pause
+goto :root
+
+:root
 cls
 echo.
 echo Using volume up/down and the power button to select choose Mounts and storage.
@@ -270,13 +223,25 @@ echo all your base are belong to us
 adb.exe kill-server
 GOTO:EOF
 
-:remove
-fastboot.exe flash system Files/system.img
-fastboot.exe flash boot Files/boot.img
-fastboot.exe flash recovery Files/recovery.img
-fastboot.exe oem lock
-fastboot.exe reboot
-echo No root here!!!!!!
+:TWRP
+fastboot.exe flash recovery Files/Crespo4G/recovery.img
+echo.
+echo.
+echo please use the volume down button and select recovery and press power
+echo.
+echo.
+pause
+goto :root
+
+:TWRP4g
+fastboot.exe flash recovery Files/Crespo4G/TWRP/recovery.img
+echo.
+echo.
+echo please use the volume down button and select recovery and press power
+echo.
+echo.
+pause
+goto :root
 
 :crespomenu
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -287,7 +252,7 @@ echo.
 echo Menu:
 echo.
 echo 1) Root and Install ClockworkMod 5.0.2.0
-echo 2) Unroot
+echo 2) Root and Install TWRP 1.1.1
 echo 3) Quit
 echo.
 echo ONLY ONE MENU ITEM IS RUN AT A TIME
@@ -297,8 +262,8 @@ set menu=""
 set /p menu=Please type a number [1-3] and press enter 
 echo.
 echo.
-if "%menu%"=="1" goto :root
-if "%menu%"=="2" goto :remove
+if "%menu%"=="1" goto :CWM
+if "%menu%"=="2" goto :TWRP
 if "%menu%"=="3" goto :eof
 goto :crespomenu
 
@@ -311,7 +276,7 @@ echo.
 echo Menu:
 echo.
 echo 1) Root and Install ClockworkMod 5.0.2.0
-echo 2) Unroot
+echo 2) Root and Install TWRP 1.1.1
 echo 3) Quit
 echo.
 echo ONLY ONE MENU ITEM IS RUN AT A TIME
@@ -321,8 +286,8 @@ set menu=""
 set /p menu=Please type a number [1-3] and press enter 
 echo.
 echo.
-if "%menu%"=="1" goto :root4g
-if "%menu%"=="2" goto :remove
+if "%menu%"=="1" goto :CWM4g
+if "%menu%"=="2" goto :TWRP4g
 if "%menu%"=="3" goto :eof
 goto :crespo4gmenu
 
