@@ -1,6 +1,6 @@
-i have included drivers if you need them. 
+I have included drivers if you need them. 
 
-run the run.bat as admin (right click and run as administrator), 
+Run the run.bat as admin (right click and run as administrator), 
 if it gives errors please wait 2-3 mins and try again as the computer might be installing drivers
 
 
@@ -35,6 +35,13 @@ Changed drivers to make it easier
 5.1
 Updated TWRP 1.1.1 to 2.0RC0 for Nexus S and Nexus S 4G
 Added support for Galaxy Nexus (CDMA/LTE)
+
+6.0
+Updated CWM to 6.0.1.0
+Updated TWRP to 2.2
+Added TWRP for all devices
+Added Sprint Galaxy nexus support and Nexus 7
+Streamlined the code and made it much better
 
 
 Credits: 
