@@ -43,6 +43,11 @@ Added TWRP for all devices
 Added Sprint Galaxy nexus support and Nexus 7
 Streamlined the code and made it much better
 
+6.5
+Added in wget
+Auto detects your device and will download according recovery, meaning less initial downloads for you! yay!
+With this new systm all i need to do is add in the coresponding recoveries on my website (shabbypenguin.com) and your nexus device gains support :)
+
 
 Credits: 
 

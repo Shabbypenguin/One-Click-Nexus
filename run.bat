@@ -42,6 +42,35 @@ echo.
 echo.
 pause
 cls
+@rem *** Find WGET.EXE or abort *********************************************
+set BatchFileDir=%~dp0
+set WgetExe=%BatchFileDir%/Files/tools/wget.exe
+if exist "%WgetExe%" goto FoundWgetExe
+set WgetExe=%CD%\/Files/tools/wget.exe
+if exist "%WgetExe%" goto FoundWgetExe
+set WgetExe=
+for %%f in ("WgetExe") do set WgetExe=%%~$PATH:f
+if not "%WgetExe%" == "" FoundWgetExe
+echo ERROR: Could not find "Wget.exe" (have you installed it?)
+echo.
+echo To find Wget.EXE this script:
+echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+echo (1) Looks in the same directory as the batch file ("%BatchFileDir%)
+echo.
+echo (2) Looks in the current directory (%CD%)
+echo.
+echo (3) Looks in the PATH, that is one of the following directories: %PATH%
+echo.
+pause
+goto :EOF
+:FoundWgetExe
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo USING WGET: "%WgetExe%"
 @rem *** Find AD.EXE or abort *********************************************
 set BatchFileDir=%~dp0
 set AdbExe=%BatchFileDir%/Files/tools/adb.exe
@@ -64,13 +93,6 @@ echo.
 pause
 goto :EOF
 :FoundAdbExe
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
 echo.
 echo USING ADB: "%AdbExe%"
 echo.
@@ -104,12 +126,12 @@ echo.
 pause
 cls
 cd "%~dp0"
-adb kill-server 2>NUL
+%AdbExe% kill-server 2>NUL
 SET MYDEVICE=
-adb start-server 2>NUL
+%AdbExe% start-server 2>NUL
 cls
 del mydevicetmp 2>NUL
-adb shell getprop ro.product.device > mydevicetmp
+%AdbExe% shell getprop ro.product.device > mydevicetmp
 set /p MYDEVICE= < mydevicetmp
 del mydevicetmp 2>NUL
 echo.
@@ -204,12 +226,12 @@ if "%menu%"=="n" goto :eof
 goto :WARNING
 
 :UNLOCK
-adb reboot bootloader
+%AdbExe% reboot bootloader
 @ping 127.0.0.1 -n 6 -w 1000 > nul
 cls
 echo if your phone is not displayed or it stays on waiting for device for too long then there was an error with the drivers or its not in fastboot
 echo.
-fastboot devices
+%Fastboot% devices
 echo.
 echo Please look at your phone
 echo.
@@ -217,14 +239,14 @@ echo.
 echo Using Volume up and down please choose the unlock option, hit power to make the selection
 echo.
 echo.
-fastboot oem unlock
+%Fastboot% oem unlock
 echo.
 pause
 echo.
 echo.
-fastboot reboot
+%Fastboot% reboot
 cls
-adb wait-for-device devices
+%AdbExe% wait-for-device devices
 cls
 echo.
 echo.
@@ -253,13 +275,13 @@ goto :PUSHFILES
 cls
 echo Pushing files over
 @ping 127.0.0.1 -n 6 -w 1000 > nul
-adb push Files/root/SuperSU-v0.94+.zip /sdcard/root.zip
+%AdbExe% push Files/root/SuperSU-v0.94+.zip /sdcard/root.zip
 goto :DEVICEMENU
 
 :DEVICEMENU
 cls
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
-echo          All in One Root and Recovery v6.0
+echo          All in One Root and Recovery v6.5
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo.
 echo.
@@ -279,9 +301,16 @@ if "%menu%"=="2" goto :DEVICETWRP
 if "%menu%"=="3" goto :eof
 goto :DEVICEMENU
 
+
 :DEVICECWM
-adb reboot bootloader
-fastboot flash recovery Files/%mydevice%/CWM/recovery.img
+%AdbExe% reboot bootloader
+echo.
+echo.
+echo.
+echo        Downloading CWM..
+%WgetExe% http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/%MYDEVICE%/CWM/recovery.img -P %BatchFileDir%/Files/%MYDEVICE%/CWM/
+%Fastboot% flash recovery Files/%MYDEVICE%/CWM/recovery.img
+cls
 echo.
 echo.
 echo please use the volume down button and select recovery and press power
@@ -291,8 +320,14 @@ pause
 goto :ROOT
 
 :DEVICETWRP
-adb reboot bootloader
-fastboot flash recovery Files/%mydevice%/TWRP/recovery.img
+%AdbExe% reboot bootloader
+echo.
+echo.
+echo.
+echo        Downloading TWRP..
+%WgetExe% http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/%MYDEVICE%/TWRP/recovery.img -P %BatchFileDir%/Files/%MYDEVICE%/TWRP/
+%Fastboot% flash recovery Files/%MYDEVICE%/TWRP/recovery.img
+cls
 echo.
 echo.
 echo please use the volume down button and select recovery and press power
@@ -307,10 +342,10 @@ REM Here is teh actual part of the script that does the rooting
 cls
 echo Pushing files over
 @ping 127.0.0.1 -n 6 -w 1000 > nul
-adb push Files/root/SuperSU-v0.94+.zip /sdcard/root.zip
+%AdbExe% push Files/root/SuperSU-v0.94+.zip /sdcard/root.zip
 echo Rebooting...
-adb reboot recovery
-adb wait-for-device
+%AdbExe% reboot recovery
+%AdbExe% wait-for-device
 goto :ROOT
 
 :ROOT
@@ -346,5 +381,5 @@ pause
 echo.
 echo
 echo all your base are belong to us
-adb kill-server
+%AdbExe% kill-server
 GOTO:EOF
