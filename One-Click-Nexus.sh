@@ -21,35 +21,35 @@ CLS='printf "\033c"'
 
 f_ROOT () {
 $CLS
-echo ""
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
+echo 
 echo "  			Select install zip from sd card"
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
 echo "Press enter to continue"; read line
 $CLS
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
 echo " 		 	Select choose zip from sdcard"
-echo ""
-echo ""
+echo 
+echo 
 echo " 	Scroll all the way down and select root.zip, choose yes"
-echo ""
+echo 
 echo "Press enter to continue"; read line
-echo ""
+echo 
 $CLS
-echo ""
+echo 
 echo " 			  Congrats you are rooted!"
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
 echo "Press enter to continue"; read line
-echo ""
-echo ""
+echo 
+echo 
 echo " all your base are belong to us"
 if [ -z $(which sudo 2>/dev/null) ]; then
 	$ADB kill-server
@@ -72,18 +72,39 @@ f_ROOT
 f_DEVICECWM () {
 $CLS
 $ADB reboot bootloader
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
 echo        Downloading CWM..
-wget http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/$MYDEVICE/CWM/recovery.img -P $PWD/Files/$MYDEVICE/CWM/
+wget -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/$MYDEVICE/CWM/recovery.img -P $PWD/Files/$MYDEVICE/CWM/
+sleep 5
 $FASTBOOT flash recovery Files/$MYDEVICE/CWM/recovery.img
 $CLS
-echo ""
-echo ""
+echo 
+echo 
 echo " please use the volume down button and select recovery and press power"
-echo ""
-echo ""
+echo 
+echo 
+echo "Press enter to continue"; read line
+f_ROOT
+}
+
+f_DEVICECWMT () {
+$CLS
+$ADB reboot bootloader
+echo 
+echo 
+echo 
+echo        Downloading CWMT..
+wget -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/$MYDEVICE/CWMT/recovery.img -P $PWD/Files/$MYDEVICE/CWMT/
+sleep 5
+$FASTBOOT flash recovery Files/$MYDEVICE/CWMT/recovery.img
+$CLS
+echo 
+echo 
+echo " please use the volume down button and select recovery and press power"
+echo 
+echo 
 echo "Press enter to continue"; read line
 f_ROOT
 }
@@ -91,18 +112,19 @@ f_ROOT
 f_DEVICETWRP () {
 $CLS
 $ADB reboot bootloader
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
 echo "       Downloading TWRP.."
-wget http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/$MYDEVICE/TWRP/recovery.img -P $PWD/Files/$MYDEVICE/TWRP/
+wget -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/$MYDEVICE/TWRP/recovery.img -P $PWD/Files/$MYDEVICE/TWRP/
+sleep 5
 $FASTBOOT flash recovery Files/$MYDEVICE/TWRP/recovery.img
 $CLS
-echo ""
-echo ""
+echo 
+echo 
 echo " please use the volume down button and select recovery and press power"
-echo ""
-echo ""
+echo 
+echo 
 echo "Press enter to continue"; read line
 f_ROOT
 }
@@ -114,21 +136,23 @@ while :
 do
 case $choice in
 1) f_DEVICECWM ;;
-2) f_DEVICETWRP ;;
+2) f_DEVICECWMT ;;
+3) f_DEVICETWRP ;;
 esac
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo "         All in One Root and Recovery v7.0"
+echo "         All in One Root and Recovery v7.2"
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo ""
-echo ""
+echo 
+echo 
 echo "Menu:"
-echo ""
+echo 
 echo "1) Root and Install ClockworkMod 6.0.1.0"
-echo "2) Root and Install TWRP 2.2"
-echo ""
-echo ""
-echo ""
-echo ""
+echo "2) Root and Install ClockworkMod Touch 6.0.1.0"
+echo "3) Root and Install TWRP 2.2"
+echo 
+echo 
+echo 
+echo 
 read choice
 done
 }
@@ -146,34 +170,34 @@ $ADB reboot bootloader
 sleep 6
 $CLS
 echo "if your phone is not displayed or it stays on waiting for device for too long then there was an error with the drivers or its not in fastboot"
-echo ""
+echo 
 $FASTBOOT devices
-echo ""
+echo 
 echo "Please look at your phone"
-echo ""
-echo ""
+echo 
+echo 
 echo "Using Volume up and down please choose the unlock option, hit power to make the selection"
-echo ""
-echo ""
+echo 
+echo 
 $FASTBOOT oem unlock
-echo ""
+echo 
 echo "Press enter to continue"; read line
-echo ""
-echo ""
+echo 
+echo 
 $FASTBOOT reboot
 $CLS
 $ADB "wait-for-device" devices
 $CLS
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
 echo "                   You need to enable usb debugging again"
-echo ""
+echo 
 echo "                 Go to settings - applications - development"
 export PS1="\e[0;31m[\u@\h \W]\$ \e[m "
 sleep 2
@@ -182,25 +206,24 @@ sleep 2
 export PS1="\e[0;31m[\u@\h \W]\$ \e[m "
 sleep 2
 export PS1="\e[0;32m[\u@\h \W]\$ \e[m "
-echo ""
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
+echo 
 echo "Press enter to continue"; read line
 f_PUSHFILES
 }
 
 f_WARNING () {
 $CLS
+unset choice
 while :
 do
-echo ""
+echo 
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "Please Read Carefully"
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo ""
-sleep 2
-$CLS
+echo 
 echo "  Warning"
 echo "  Warning"
 echo "  Warning"
@@ -211,8 +234,8 @@ echo "   THIS WILL WIPE ALL OF YOUR APPS, CONTACTS GAMESAVES ETC EVERYTHING"
 echo "                      INCLUDING YOUR SD CARD"
 echo "  Warning"
 echo "  Warning"
-echo ""
-echo ""
+echo 
+echo 
 case $choice in
 Y) f_UNLOCK ;;
 y) f_UNLOCK ;;
@@ -221,12 +244,12 @@ n) exit 0 ;;
 *) echo "\"$choice\" is not valid"
 sleep 2
 esac
-echo ""
+echo 
 echo "Do you wish to continue?"
-echo ""
-echo ""
+echo 
+echo 
 echo "Type Y/N"
-echo ""
+echo 
 read choice
 done
 }
@@ -235,24 +258,24 @@ f_BOOTMENU () {
 unset choice
 while :
 do
-echo ""
+echo 
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "Please Read Carefully"
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo ""
-echo ""
+echo 
+echo 
 echo "Menu:"
-echo ""
+echo 
 echo "1) This is a stock locked phone"
 echo "2) This phone has its bootloader unlocked but not root/recovery"
 echo "3) Already got recovery? just need root?"
 echo "4) Quit"
-echo ""
-echo ""
+echo 
+echo 
 echo -n "Your choice? : "
 read choice
-echo ""
-echo ""
+echo 
+echo 
 case $choice in
 1) f_WARNING ;;
 2) f_PUSHFILES ;;
@@ -266,37 +289,37 @@ done
 
 
 $CLS
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
 echo "                     One Click Root for the Nexus Devices"
-echo ""
+echo 
 echo "              		        By Shabbypenguin"
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
 echo "Press enter to continue"; read line
 $CLS
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
 echo "                    You need to enable usb debugging first"
-echo ""
+echo 
 echo "                  Go to settings - applications - development"
-echo ""
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
+echo 
 echo "Press enter to continue"; read line
 $CLS
 cd $PWD
@@ -312,21 +335,21 @@ else
 fi
 $CLS
 MYDEVICE=`$ADB shell getprop ro.product.device`
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
 echo "      		 	 Your device is: $MYDEVICE"
-echo ""
+echo 
 echo " 		 If this is incorrect please exit this program"
-echo ""
-echo ""
-echo ""
-echo ""
+echo 
+echo 
+echo 
+echo 
 echo "Press enter to continue"; read line
 $CLS
 f_BOOTMENU

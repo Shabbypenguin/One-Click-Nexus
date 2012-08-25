@@ -51,6 +51,10 @@ With this new systm all i need to do is add in the coresponding recoveries on my
 7.0
 Added support for Linux and Intel based Macs
 
+7.2
+Added Universal Naked Drivers 0.7 courtesy of 1wayjonny (read more about it here http://forum.xda-developers.com/showthread.php?t=1766220)
+Added CWM touch 6.0.1.0
+
 Credits: 
 -k0nane for helping with wget
 -chris41g for teaching me a few scripting techniques over the years
