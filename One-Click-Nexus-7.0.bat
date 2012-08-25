@@ -281,7 +281,7 @@ goto :DEVICEMENU
 :DEVICEMENU
 cls
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
-echo          All in One Root and Recovery v6.5
+echo          All in One Root and Recovery v7.0
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo.
 echo.

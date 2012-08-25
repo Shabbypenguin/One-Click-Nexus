@@ -48,11 +48,13 @@ Added in wget
 Auto detects your device and will download according recovery, meaning less initial downloads for you! yay!
 With this new systm all i need to do is add in the coresponding recoveries on my website (shabbypenguin.com) and your nexus device gains support :)
 
+7.0
+Added support for Linux and Intel based Macs
 
 Credits: 
-
+-k0nane for helping with wget
+-chris41g for teaching me a few scripting techniques over the years
 -Drockstar for his awesome sauce menu on his one clicks and helping me out when i needed it :)
--ACS for bein awesome
 -the followin guys for their continuing help:
 Nullghost
 Decad3nce
