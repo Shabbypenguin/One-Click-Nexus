@@ -309,7 +309,7 @@ echo.
 echo.
 echo.
 echo        Downloading CWM..
-%WgetExe% -p http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/%MYDEVICE%/CWM/recovery.img -P %BatchFileDir%/Files/%MYDEVICE%/CWM/
+%WgetExe% -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/%MYDEVICE%/CWM/recovery.img -P %BatchFileDir%/Files/%MYDEVICE%/CWM/
 ping -n 5 127.0.0.1 > nul
 %Fastboot% flash recovery Files/%MYDEVICE%/CWM/recovery.img
 cls
@@ -327,7 +327,7 @@ echo.
 echo.
 echo.
 echo        Downloading CWMT..
-%WgetExe% -p http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/%MYDEVICE%/CWMT/recovery.img -P %BatchFileDir%/Files/%MYDEVICE%/CWMT/
+%WgetExe% -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/%MYDEVICE%/CWMT/recovery.img -P %BatchFileDir%/Files/%MYDEVICE%/CWMT/
 ping -n 5 127.0.0.1 > nul
 %Fastboot% flash recovery Files/%MYDEVICE%/CWMT/recovery.img
 cls
@@ -345,7 +345,7 @@ echo.
 echo.
 echo.
 echo        Downloading TWRP..
-%WgetExe% -p http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/%MYDEVICE%/TWRP/recovery.img -P %BatchFileDir%/Files/%MYDEVICE%/TWRP/
+%WgetExe% -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/%MYDEVICE%/TWRP/recovery.img -P %BatchFileDir%/Files/%MYDEVICE%/TWRP/
 ping -n 5 127.0.0.1 > nul
 %Fastboot% flash recovery Files/%MYDEVICE%/TWRP/recovery.img
 cls
