@@ -3,54 +3,33 @@
 platform=`uname`;
 ADB=$PWD"/Files/tools/adb";
 FASTBOOT=$PWD"/Files/tools/fastboot";
-if [ $(uname -p) == 'powerpc' ]; then
-	echo "Sorry, this won't work on PowerPC machines."
-exit 0
-fi
 cd "$(dirname "$0")"
 if [ -z $(which adb) ]; then
-	adb="./adb";
+	ADB=$PWD"/Files/tools/adb";
+    FASTBOOT=$PWD"/Files/tools/fastboot";
 	if [ "$platform" == 'Darwin' ]; then
-		mv /Files/tools/adb.osx $ADB > /dev/null 2>&1
-		mv /Files/tools/fastboot.osx $FASTBOOT > /dev/null 2>&1
+		ADB=$PWD"/Files/tools/adb.osx"
+		FASTBOOT=$PWD"/Files/tools/fastboot.osx"
 	fi
 fi
 chmod +x $ADB
+chmod +x $FASTBOOT
 CLS='printf "\033c"'
 # End section, thanks Firon!
 
 f_ROOT () {
 $CLS
-echo 
-echo 
-echo 
-echo 
-echo "  			Select install zip from sd card"
-echo 
-echo 
-echo 
+sleep 3
+echo "Pushing Recovery Script"
+$ADB push Files/root/supersu-signed.zip /sdcard/supersu-signed.zip
+$ADB push Files/root/command /cache/recovery/command
+$ADB shell killall recovery
+sleep 3
+echo "Running automated recovery commands"
+sleep 4
+echo "Enjoy root :)"
 echo "Press enter to continue"; read line
-$CLS
-echo 
-echo 
-echo 
-echo " 		 	Select choose zip from sdcard"
-echo 
-echo 
-echo " 	Scroll all the way down and select root.zip, choose yes"
-echo 
-echo "Press enter to continue"; read line
-echo 
-$CLS
-echo 
-echo " 			  Congrats you are rooted!"
-echo 
-echo 
-echo 
-echo "Press enter to continue"; read line
-echo 
-echo 
-echo " all your base are belong to us"
+$ADB reboot
 if [ -z $(which sudo 2>/dev/null) ]; then
 	$ADB kill-server
 else
@@ -59,66 +38,16 @@ fi
 exit 0
 }
 
-f_PREROOT () {
-$CLS
-echo "Pushing files over"
-sleep 5
-$ADB push Files/root/SuperSU-v0.94+.zip /sdcard/root.zip
-echo " Rebooting..."
-$ADB reboot recovery
-f_ROOT
-}
-
-f_DEVICECWM () {
+f_FLASH () {
 $CLS
 $ADB reboot bootloader
 echo 
 echo 
 echo 
-echo        Downloading CWM..
-wget -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/$MYDEVICE/CWM/recovery.img -P $PWD/Files/$MYDEVICE/CWM/
+echo        Downloading $RECOVERY..
+wget -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/$MYDEVICE/$RECOVERY/recovery.img -P $PWD/Files/Devices/$MYDEVICE/$RECOVERY/
 sleep 5
-$FASTBOOT flash recovery Files/$MYDEVICE/CWM/recovery.img
-$CLS
-echo 
-echo 
-echo " please use the volume down button and select recovery and press power"
-echo 
-echo 
-echo "Press enter to continue"; read line
-f_ROOT
-}
-
-f_DEVICECWMT () {
-$CLS
-$ADB reboot bootloader
-echo 
-echo 
-echo 
-echo        Downloading CWMT..
-wget -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/$MYDEVICE/CWMT/recovery.img -P $PWD/Files/$MYDEVICE/CWMT/
-sleep 5
-$FASTBOOT flash recovery Files/$MYDEVICE/CWMT/recovery.img
-$CLS
-echo 
-echo 
-echo " please use the volume down button and select recovery and press power"
-echo 
-echo 
-echo "Press enter to continue"; read line
-f_ROOT
-}
-
-f_DEVICETWRP () {
-$CLS
-$ADB reboot bootloader
-echo 
-echo 
-echo 
-echo "       Downloading TWRP.."
-wget -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/$MYDEVICE/TWRP/recovery.img -P $PWD/Files/$MYDEVICE/TWRP/
-sleep 5
-$FASTBOOT flash recovery Files/$MYDEVICE/TWRP/recovery.img
+$FASTBOOT flash recovery Files/Devices/$MYDEVICE/$RECOVERY/recovery.img
 $CLS
 echo 
 echo 
@@ -135,34 +64,26 @@ unset choice
 while :
 do
 case $choice in
-1) f_DEVICECWM ;;
-2) f_DEVICECWMT ;;
-3) f_DEVICETWRP ;;
+1) RECOVERY=CWM && f_FLASH ;;
+2) RECOVERY=CWMT && f_FLASH ;;
+3) RECOVERY=TWRP && f_FLASH ;;
 esac
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo "         All in One Root and Recovery v7.2"
+echo "         All in One Root and Recovery v8.0"
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo 
 echo 
 echo "Menu:"
 echo 
-echo "1) Root and Install ClockworkMod 6.0.1.0"
-echo "2) Root and Install ClockworkMod Touch 6.0.1.0"
-echo "3) Root and Install TWRP 2.2"
+echo "1) Root and Install ClockworkMod"
+echo "2) Root and Install ClockworkMod Touch"
+echo "3) Root and Install TWRP"
 echo 
 echo 
 echo 
 echo 
 read choice
 done
-}
-
-f_PUSHFILES () {
-$CLS
-echo "Pushing files over"
-sleep 2
-$ADB push Files/root/SuperSU-v0.94+.zip /sdcard/root.zip
-f_DEVICEMENU
 }
 
 f_UNLOCK () {
@@ -278,8 +199,8 @@ echo
 echo 
 case $choice in
 1) f_WARNING ;;
-2) f_PUSHFILES ;;
-3) f_PREROOT ;;
+2) f_DEVICEMENU ;;
+3) $ADB reboot recovery && sleep 21 && f_ROOT ;;
 4) exit 0 ;;
 *) echo "\"$choice\" is not valid"
 sleep 2 ;;
@@ -335,6 +256,7 @@ else
 fi
 $CLS
 MYDEVICE=`$ADB shell getprop ro.product.device`
+rm -rf Files/Devices/*
 echo 
 echo 
 echo 

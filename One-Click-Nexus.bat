@@ -1,6 +1,5 @@
 @echo off
 @echo off
-echo kang'd drockstars menu for nexus s
 cls
 color 0A
 echo.
@@ -11,9 +10,9 @@ echo.
 echo.
 echo.
 echo.
-echo        		     One Click Root for the Nexus Devices
+echo                 One Click Root for the Nexus Devices
 echo.
-echo              		        By Shabbypenguin
+echo                           By Shabbypenguin
 echo.
 echo.
 echo.
@@ -28,9 +27,11 @@ echo.
 echo.
 echo.
 echo.
-echo                    You need to enable usb debugging first
+echo                   You need to enable usb debugging
+echo              Go to settings - applications - development
 echo.
-echo                  Go to settings - applications - development
+echo                         Or in ICS and higher
+echo            Settings - Developer Options - Android Debugging
 color 0A
 ping -n 2 127.0.0.1 > nul
 color 0C
@@ -118,7 +119,7 @@ echo.
 pause
 goto :EOF
 :FoundFastboot
-echo USING Fastboot: "%Fastboot%"
+echo USING FASTBOOT: "%Fastboot%"
 echo.
 echo.
 echo.
@@ -128,12 +129,16 @@ cls
 cd "%~dp0"
 %AdbExe% kill-server 2>NUL
 SET MYDEVICE=
+SET RECOVERY=
 %AdbExe% start-server 2>NUL
 cls
 del mydevicetmp 2>NUL
 %AdbExe% shell getprop ro.product.device > mydevicetmp
 set /p MYDEVICE= < mydevicetmp
 del mydevicetmp 2>NUL
+mkdir Files\Devices\%MYDEVICE%
+rmdir /s /q Files\Devices\%MYDEVICE%
+cls
 echo.
 echo.
 echo.
@@ -142,9 +147,9 @@ echo.
 echo.
 echo.
 echo.
-echo       		 	 Your device is: %MYDEVICE%
+echo                      Your device is: %MYDEVICE%
 echo.
-echo  		 If this is incorrect please exit this program
+echo           If this is incorrect please exit this program
 echo.
 echo.
 echo.
@@ -173,8 +178,8 @@ set /p menu=Please type a number [1-4] and press enter
 echo.
 echo.
 if "%menu%"=="1" goto :WARNING
-if "%menu%"=="2" goto :PUSHFILES
-if "%menu%"=="3" goto :PREROOT
+if "%menu%"=="2" goto :DEVICEMENU
+if "%menu%"=="3" %AdbExe% reboot recovery && ping 127.0.0.1 -n 22 -w 1000 > nul && goto :ROOT
 if "%menu%"=="4" goto :eof
 goto :bootmenu
 
@@ -259,6 +264,9 @@ echo.
 echo                    You need to enable usb debugging again
 echo.
 echo                  Go to settings - applications - development
+echo.
+echo				 			 Or in ICS and higher
+echo				Settings - Developer Options - Android Debugging
 color 0A
 ping -n 2 127.0.0.1 > nul
 color 0C
@@ -269,85 +277,43 @@ echo.
 echo.
 echo.
 pause
-goto :PUSHFILES
-
-:PUSHFILES
-cls
-echo Pushing files over
-@ping 127.0.0.1 -n 6 -w 1000 > nul
-%AdbExe% push Files/root/SuperSU-v0.94+.zip /sdcard/root.zip
 goto :DEVICEMENU
 
 :DEVICEMENU
 cls
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
-echo          All in One Root and Recovery v7.2
+echo          All in One Root and Recovery v8.0
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo.
 echo.
 echo Menu:
 echo.
-echo 1) Root and Install ClockworkMod 6.0.1.0
-echo 2) Root and Install ClockworkMod Touch 6.0.1.0
-echo 3) Root and Install TWRP 2.2
+echo 1) Root and Install ClockworkMod
+echo 2) Root and Install ClockworkMod Touch
+echo 3) Root and Install TWRP
 echo 4) Quit
 echo.
 echo.
 set menu=""
-set /p menu=Please type a number [1-3] and press enter 
+set /p menu=Please type a number [1-4] and press enter 
 echo.
 echo.
-if "%menu%"=="1" goto :DEVICECWM
-if "%menu%"=="2" goto :DEVICECWMT
-if "%menu%"=="3" goto :DEVICETWRP
+if "%menu%"=="1" set RECOVERY=CWM
+if "%menu%"=="2" set RECOVERY=CWMT
+if "%menu%"=="3" set RECOVERY=TWRP
 if "%menu%"=="4" goto :eof
-goto :DEVICEMENU
+goto :FLASH
 
-:DEVICECWM
+:FLASH
 %AdbExe% reboot bootloader
-echo.
-echo.
-echo.
-echo        Downloading CWM..
-%WgetExe% -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/%MYDEVICE%/CWM/recovery.img -P %BatchFileDir%/Files/%MYDEVICE%/CWM/
-ping -n 5 127.0.0.1 > nul
-%Fastboot% flash recovery Files/%MYDEVICE%/CWM/recovery.img
 cls
 echo.
 echo.
-echo please use the volume down button and select recovery and press power
 echo.
-echo.
-pause
-goto :ROOT
-
-:DEVICECWMT
-%AdbExe% reboot bootloader
-echo.
-echo.
-echo.
-echo        Downloading CWMT..
-%WgetExe% -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/%MYDEVICE%/CWMT/recovery.img -P %BatchFileDir%/Files/%MYDEVICE%/CWMT/
-ping -n 5 127.0.0.1 > nul
-%Fastboot% flash recovery Files/%MYDEVICE%/CWMT/recovery.img
-cls
-echo.
-echo.
-echo please use the volume down button and select recovery and press power
-echo.
-echo.
-pause
-goto :ROOT
-
-:DEVICETWRP
-%AdbExe% reboot bootloader
-echo.
-echo.
-echo.
-echo        Downloading TWRP..
-%WgetExe% -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/%MYDEVICE%/TWRP/recovery.img -P %BatchFileDir%/Files/%MYDEVICE%/TWRP/
-ping -n 5 127.0.0.1 > nul
-%Fastboot% flash recovery Files/%MYDEVICE%/TWRP/recovery.img
+echo        Downloading %RECOVERY%..
+%WgetExe% -q http://www.Shabbypenguin.com/Android/Scripts/Nexus-Files/Recoveries/%MYDEVICE%/%RECOVERY%/recovery.img -P %BatchFileDir%/Files/Devices/%MYDEVICE%/%RECOVERY%/
+ping -n 2 127.0.0.1 > nul
+%Fastboot% flash recovery Files/Devices/%MYDEVICE%/%RECOVERY%/recovery.img
 cls
 echo.
 echo.
@@ -359,48 +325,23 @@ goto :ROOT
 
 REM Here is teh actual part of the script that does the rooting
 
-:PREROOT
-cls
-echo Pushing files over
-@ping 127.0.0.1 -n 6 -w 1000 > nul
-%AdbExe% push Files/root/SuperSU-v0.94+.zip /sdcard/root.zip
-echo Rebooting...
-%AdbExe% reboot recovery
-%AdbExe% wait-for-device
-goto :ROOT
-
 :ROOT
 cls
 echo.
 echo.
 echo.
 echo.
-echo  			Select install zip from sd card
+echo Pushing Recovery Script
 echo.
+@ping 127.0.0.1 -n 3 -w 1000 > nul
+%AdbExe% push Files/root/SuperSU-v0.96+.zip /sdcard/root.zip
+%AdbExe% push Files/root/command /cache/recovery/command
+%AdbExe% shell killall recovery
 echo.
+echo Running automated recovery commands
 echo.
+@ping 127.0.0.1 -n 3 -w 1000 > nul
+echo Choose yes and enjoy root :)
 pause
-cls
-echo.
-echo.
-echo.
-echo 		 	Select choose zip from sdcard
-echo.
-echo.
-echo 	Scroll all the way down and select root.zip, choose yes
-echo.
-@ping 127.0.0.1 -n 10 -w 1000 > nul
-pause
-echo.
-cls
-echo.
-echo 				Congrats you are rooted!
-echo.
-echo.
-echo.
-pause
-echo.
-echo
-echo all your base are belong to us
-%AdbExe% kill-server
-GOTO:EOF
+%AbdExe% reboot
+goto :EOF

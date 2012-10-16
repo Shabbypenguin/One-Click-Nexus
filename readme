@@ -55,6 +55,12 @@ Added support for Linux and Intel based Macs
 Added Universal Naked Drivers 0.7 courtesy of 1wayjonny (read more about it here http://forum.xda-developers.com/showthread.php?t=1766220)
 Added CWM touch 6.0.1.0
 
+8.0
+Updated TWRP for all devices to 2.3
+Rewrote some of the code to make it even smaller (yay for variables!)
+Added busybox installer to the custom supersu.zip i have
+Oh yea, i used recovery commands to automate installing the flashable zip (cant believe no one else did this :P )
+
 Credits: 
 -k0nane for helping with wget
 -chris41g for teaching me a few scripting techniques over the years
