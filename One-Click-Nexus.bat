@@ -334,7 +334,7 @@ echo.
 echo Pushing Recovery Script
 echo.
 @ping 127.0.0.1 -n 3 -w 1000 > nul
-%AdbExe% push Files/root/SuperSU-v0.96+.zip /sdcard/root.zip
+%AdbExe% push Files/root/supersu-signed.zip /sdcard/supersu-signed.zip
 %AdbExe% push Files/root/command /cache/recovery/command
 %AdbExe% shell killall recovery
 echo.
