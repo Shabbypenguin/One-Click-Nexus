@@ -282,7 +282,7 @@ goto :DEVICEMENU
 :DEVICEMENU
 cls
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
-echo          All in One Root and Recovery v8.0
+echo          All in One Root and Recovery v8.1
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo.
 echo.
@@ -334,7 +334,7 @@ echo.
 echo Pushing Recovery Script
 echo.
 @ping 127.0.0.1 -n 3 -w 1000 > nul
-%AdbExe% push Files/root/supersu-signed.zip /sdcard/supersu-signed.zip
+%AdbExe% push Files/root/superuser.zip /sdcard/superuser.zip
 %AdbExe% push Files/root/command /cache/recovery/command
 %AdbExe% shell killall recovery
 echo.

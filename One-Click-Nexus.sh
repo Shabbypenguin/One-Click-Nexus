@@ -21,7 +21,7 @@ f_ROOT () {
 $CLS
 sleep 3
 echo "Pushing Recovery Script"
-$ADB push Files/root/supersu-signed.zip /sdcard/supersu-signed.zip
+$ADB push Files/root/superuser.zip /sdcard/superuser.zip
 $ADB push Files/root/command /cache/recovery/command
 $ADB shell killall recovery
 sleep 3
@@ -69,7 +69,7 @@ case $choice in
 3) RECOVERY=TWRP && f_FLASH ;;
 esac
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo "         All in One Root and Recovery v8.0"
+echo "         All in One Root and Recovery v8.1"
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo 
 echo 

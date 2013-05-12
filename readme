@@ -61,6 +61,11 @@ Rewrote some of the code to make it even smaller (yay for variables!)
 Added busybox installer to the custom supersu.zip i have
 Oh yea, i used recovery commands to automate installing the flashable zip (cant believe no one else did this :P )
 
+8.1
+Updated adb/fastboot
+Updated/swap to Koush's Superuser
+
+
 Credits: 
 -k0nane for helping with wget
 -chris41g for teaching me a few scripting techniques over the years
