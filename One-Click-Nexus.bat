@@ -32,6 +32,10 @@ echo              Go to settings - applications - development
 echo.
 echo                         Or in ICS and higher
 echo            Settings - Developer Options - Android Debugging
+echo.
+echo                         Or in 4.2 and higher
+echo  Settings - About phone - Tap build number 7 times - Use ICS instructions
+echo.
 color 0A
 ping -n 2 127.0.0.1 > nul
 color 0C
@@ -261,12 +265,16 @@ echo.
 echo.
 echo.
 echo.
-echo                    You need to enable usb debugging again
+echo                   You need to enable usb debugging again
 echo.
-echo                  Go to settings - applications - development
+echo                Go to settings - applications - development
 echo.
-echo				 			 Or in ICS and higher
-echo				Settings - Developer Options - Android Debugging
+echo                          Or in ICS and higher
+echo             Settings - Developer Options - Android Debugging
+echo.
+echo                         Or in 4.2 and higher
+echo  Settings - About phone - Tap build number 7 times - Use ICS instructions
+echo.
 color 0A
 ping -n 2 127.0.0.1 > nul
 color 0C
@@ -282,14 +290,14 @@ goto :DEVICEMENU
 :DEVICEMENU
 cls
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
-echo          All in One Root and Recovery v8.1
+echo          All in One Root and Recovery v9.0
 echo +++++++++++++++++++++++++++++++++++++++++++++++++++++
 echo.
 echo.
 echo Menu:
 echo.
 echo 1) Root and Install ClockworkMod
-echo 2) Root and Install ClockworkMod Touch
+echo 2) Root and Install OUDHS Recovery
 echo 3) Root and Install TWRP
 echo 4) Quit
 echo.
@@ -299,7 +307,7 @@ set /p menu=Please type a number [1-4] and press enter
 echo.
 echo.
 if "%menu%"=="1" set RECOVERY=CWM
-if "%menu%"=="2" set RECOVERY=CWMT
+if "%menu%"=="2" set RECOVERY=OUDHS
 if "%menu%"=="3" set RECOVERY=TWRP
 if "%menu%"=="4" goto :eof
 goto :FLASH

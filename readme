@@ -1,4 +1,4 @@
-I have included samsung drivers if you need them. 
+Included is koush's universal adb drivers, they should cover every device this toolkit covers :) 
 
 Run the One-Click-Nexus as admin (right click and run as administrator), 
 if it gives errors please wait 2-3 mins and try again as the computer might be installing drivers
@@ -65,6 +65,10 @@ Oh yea, i used recovery commands to automate installing the flashable zip (cant 
 Updated adb/fastboot
 Updated/swap to Koush's Superuser
 
+9.0
+Switched to SuperSU 1.51
+Swapped CWMT for OUDHS recovery
+Swapped Naked drivers for koush's universal adb drivers http://download.clockworkmod.com/test/UniversalAdbDriverSetup6.msi
 
 Credits: 
 -k0nane for helping with wget

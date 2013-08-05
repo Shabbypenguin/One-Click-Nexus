@@ -65,18 +65,18 @@ while :
 do
 case $choice in
 1) RECOVERY=CWM && f_FLASH ;;
-2) RECOVERY=CWMT && f_FLASH ;;
+2) RECOVERY=OUDHS && f_FLASH ;;
 3) RECOVERY=TWRP && f_FLASH ;;
 esac
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo "         All in One Root and Recovery v8.1"
+echo "         All in One Root and Recovery v9.0"
 echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++"
 echo 
 echo 
 echo "Menu:"
 echo 
 echo "1) Root and Install ClockworkMod"
-echo "2) Root and Install ClockworkMod Touch"
+echo "2) Root and Install OUDHS Recovery"
 echo "3) Root and Install TWRP"
 echo 
 echo 
@@ -120,6 +120,12 @@ echo
 echo "                   You need to enable usb debugging again"
 echo 
 echo "                 Go to settings - applications - development"
+echo
+echo "                         Or in ICS and higher"
+echo "             Settings - Developer Options - Android Debugging"
+echo
+echo "                       Or in 4.2 and higher"
+echo " Settings - About phone - Tap build number 7 times - Use ICS instructions"
 export PS1="\e[0;31m[\u@\h \W]\$ \e[m "
 sleep 2
 export PS1="\e[0;32m[\u@\h \W]\$ \e[m "
@@ -238,7 +244,12 @@ echo "                    You need to enable usb debugging first"
 echo 
 echo "                  Go to settings - applications - development"
 echo 
-echo 
+echo
+echo "                         Or in ICS and higher"
+echo "             Settings - Developer Options - Android Debugging"
+echo
+echo  "                       Or in 4.2 and higher"
+echo  "Settings - About phone - Tap build number 7 times - Use ICS instructions"
 echo 
 echo 
 echo "Press enter to continue"; read line
